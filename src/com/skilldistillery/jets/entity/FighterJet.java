@@ -6,7 +6,8 @@ public class FighterJet extends Jet{
 		super(model, speed, range, price);
 	}
 
-	public void fight() {
-		System.out.println("pew, pew, pew...Goose!? NOOOOOOOOOO!!!!");
+	public void fight(Jet jet) {
+		System.out.println(jet.getModel() + " going in for a dogfight");
+		System.out.println();
 	}
 }

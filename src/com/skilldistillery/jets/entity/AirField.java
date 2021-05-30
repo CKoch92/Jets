@@ -20,7 +20,6 @@ public void addJet(Jet jet) {
 	jets.add(jet);
 }
 
-//TO-DO return jet data as a 
 public void readJets() {
 	
 	try {
