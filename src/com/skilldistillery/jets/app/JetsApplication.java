@@ -9,20 +9,21 @@ public class JetsApplication {
 	private AirField airfield = new AirField();
 	Scanner scanner = new Scanner(System.in);
 	List<Jet> jetList = airfield.getJets();
-	
-	public JetsApplication() {}
+
+	public JetsApplication() {
+	}
 
 	public static void main(String[] args) {
 		JetsApplication ja = new JetsApplication();
 		boolean keepGoing = true;
 		while (keepGoing) {
-		ja.displayUserMenu();
-		keepGoing = ja.lauch();
+			ja.displayUserMenu();
+			keepGoing = ja.lauch();
 		}
 	}
 
-private boolean lauch() {
-	boolean loop = true;
+	private boolean lauch() {
+		boolean loop = true;
 
 		System.out.print("Enter the number of the menu option you wish to select. ");
 		int menuSelection = (int) scanner.nextInt();
@@ -32,7 +33,7 @@ private boolean lauch() {
 		case 1:
 			listFleet();
 			break;
-		
+
 		case 2:
 			flyJets();
 			break;
@@ -48,20 +49,24 @@ private boolean lauch() {
 		case 5:
 			loadCargo();
 			break;
-		
+
 		case 6:
 			fight();
 			break;
-			
+
 		case 7:
-			addJet();		
+			addJet();
 			break;
-			
+
 		case 8:
 			removeJet();
 			break;
-			
+
 		case 9:
+			flySingleJet();
+			break;
+
+		case 10:
 			loop = false;
 			break;
 		}
@@ -80,7 +85,8 @@ private boolean lauch() {
 		System.out.println("6. Dogfight!");
 		System.out.println("7. Add a jet to Fleet");
 		System.out.println("8. Remove a jet from Fleet");
-		System.out.println("9. Quit");
+		System.out.println("9. Fly an individual jet");
+		System.out.println("10. Quit");
 		System.out.println();
 	}
 
@@ -89,7 +95,7 @@ private boolean lauch() {
 			jet.displayJet();
 		}
 	}
-	
+
 	private void flyJets() {
 		for (Jet jet : jetList) {
 			jet.fly();
@@ -129,7 +135,7 @@ private boolean lauch() {
 			}
 		}
 	}
-	
+
 	private void fight() {
 		for (Jet jet : jetList) {
 			if (jet instanceof FighterJet) {
@@ -144,35 +150,49 @@ private boolean lauch() {
 		System.out.print("What is the model of the jet you wish to add? ");
 		String userModel = scanner.next();
 		System.out.println();
-		
+
 		System.out.print("What is the high spped of the jet you wish to add? ");
 		double userSpeed = scanner.nextDouble();
 		System.out.println();
-		
+
 		System.out.print("What is the range in miles of the jet you wish to add? ");
 		int userRange = scanner.nextInt();
 		System.out.println();
-		
+
 		System.out.print("What is the high spped of the jet you wish to add? ");
 		long userPrice = scanner.nextLong();
 		System.out.println();
-		
-	JetImpl userJet = new JetImpl(userModel, userSpeed, userRange, userPrice);
-	jetList.add(userJet);	
+
+		JetImpl userJet = new JetImpl(userModel, userSpeed, userRange, userPrice);
+		jetList.add(userJet);
 	}
 
 	private void removeJet() {
 		System.out.println("Enter the number of the jet you wish to remove from the fleet");
 		System.out.println();
-		
+
 		int i = 1;
 		for (Jet jet : jetList) {
 			System.out.println(i + ": " + jet);
 			i++;
 		}
-		
+
 		int userRemove = scanner.nextInt();
-		jetList.remove((userRemove-1));
+		jetList.remove((userRemove - 1));
 		System.out.println(jetList);
+	}
+
+	private void flySingleJet() {
+		System.out.println("Enter the number of the jet you wish to fly");
+		System.out.println();
+
+		int i = 1;
+		for (Jet jet : jetList) {
+			System.out.println(i + ": " + jet);
+			i++;
+		}
+		int userFly = scanner.nextInt();
+		System.out.println(jetList.get(userFly - 1) + " is ready to fly");
+		System.out.println();
 	}
 }
